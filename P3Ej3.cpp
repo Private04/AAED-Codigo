@@ -23,7 +23,7 @@ void polinomio::coeficiente (unsigned n,double c)
 }
 polinomio operator +(polinomio& x,polinomio& y) //Devuelve x+y
 {
-    polinomio suma(x.grado() | y.grado());
+    polinomio suma((x.grado()<y.grado()) ? y.grado() : x.grado());
     unsigned GradoSumado;
     for (GradoSumado=0;GradoSumado<=x.grado() && GradoSumado<=y.grado();GradoSumado++) 
     {
@@ -48,7 +48,7 @@ polinomio operator +(polinomio& x,polinomio& y) //Devuelve x+y
 }
 polinomio operator -(polinomio& x,polinomio& y) //Devuelve x-y
 {
-    polinomio resta(x.grado() | y.grado());
+    polinomio resta((x.grado()<y.grado()) ? y.grado() : x.grado());
     unsigned GradoRestado;
     for (GradoRestado=0;GradoRestado<=x.grado() && GradoRestado<=y.grado();GradoRestado++) 
     {

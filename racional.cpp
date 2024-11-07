@@ -39,3 +39,8 @@ if (y < 0) y = -y;
 if (y) while ((x %= y) && (y %= x));
 return x + y; // Devolver el último divisor.
 }
+racional operator +(const racional& r, const entero& s)//Por implementar
+{
+    racional res(r.num(),r.den());
+    
+}
