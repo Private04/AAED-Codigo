@@ -39,8 +39,54 @@ if (y < 0) y = -y;
 if (y) while ((x %= y) && (y %= x));
 return x + y; // Devolver el último divisor.
 }
-racional operator +(const racional& r, const entero& s)//Por implementar
+//Funciones implementadas
+racional operator +(const racional& r, const racional::entero& s)
 {
-    racional res(r.num(),r.den());
+       racional suma(s);
+       return r+suma;
+}
+racional operator /(const racional& r, const racional& s)
+{
     
+    return r*inv(s);
+}
+
+racional operator -(const racional& r, const racional& s)
+{
+    racional restando(-s.num(),s.den());
+    return r+s;
+}
+
+void operator +=(racional& r, const racional& s)
+{
+    r=r+s;
+}
+
+void operator -=(racional& r, const racional& s)
+{
+    r=r-s;
+}
+void operator *=(racional& r, const racional& s)
+{
+    r=r*s;
+}
+void operator /=(racional& r, const racional& s)
+{
+    r=r/s;
+}
+bool operator !=(const racional& r,const racional& s)
+{
+    return !(r==s);
+}
+bool operator >(const racional& r,const racional& s)
+{
+    return !(r<s);
+}
+bool operator <=(const racional& r,const racional& s)
+{
+    return r<s || r==s;
+}
+bool operator >=(const racional& r,const racional& s)
+{
+    return r>s || r==s;
 }

@@ -1,4 +1,4 @@
-#include "P3Ej3.h"
+#include "mi_polinom.h"
 #include <cassert>
 polinomio::polinomio(unsigned gradoMax)
 {
@@ -18,7 +18,7 @@ double polinomio::coeficiente (unsigned n) const
 }
 void polinomio::coeficiente (unsigned n,double c)
 {
-    assert (n>gradopoli);
+    assert (n<=gradopoli);
     acoeficientes[n]=c;
 }
 polinomio operator +(polinomio& x,polinomio& y) //Devuelve x+y

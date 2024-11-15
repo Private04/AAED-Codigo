@@ -1,6 +1,5 @@
 #ifndef P3EJ1_H
 #define P3EJ1_H
-#include "polinom.h"
 polinomio operator +(polinomio& x,polinomio& y); //Devuelve x+y
 polinomio operator -(polinomio& x,polinomio& y); //Devuelve x-y
 polinomio operator *(polinomio& x,polinomio& y); //Devuelve x*y

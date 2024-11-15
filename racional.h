@@ -9,19 +9,19 @@ class racional {
         entero den() const {return d;}
         // Declaración de operadores aritméticos no miembros
         friend racional operator +(const racional& r, const racional& s);
-        friend racional operator +(const racional& r, const entero& s);//Por implementar
+        friend racional operator +(const racional& r, const entero& s);
         friend racional operator *(const racional& r, const racional& s);
-        friend racional operator /(const racional& r, const racional& s);//Por implementar
+        friend racional operator /(const racional& r, const racional& s);
         friend racional operator -(const racional& r);
-        friend racional operator -(const racional& r, const racional& s);//Por implementar
-        friend racional operator +=(const racional& r, const racional& s);//Por implementar
-        friend racional operator -=(const racional& r, const racional& s);//Por implementar
-        friend racional operator *=(const racional& r, const racional& s);//Por implementar
-        friend racional operator /=(const racional& r, const racional& s);//Por implementar
-        friend bool operator !=(const racional& r, const racional& s);//Por implementar
-        friend bool operator <=(const racional& r, const racional& s);//Por implemetar
-        friend bool operator >(const racional& r, const racional& s);//Por implemetar
-        friend bool operator >=(const racional& r, const racional& s);//Por implemetar
+        friend racional operator -(const racional& r, const racional& s);
+        friend void operator +=(racional& r, const racional& s);
+        friend void operator -=(racional& r, const racional& s);
+        friend void operator *=(racional& r, const racional& s);
+        friend void operator /=(racional& r, const racional& s);
+        friend bool operator !=(const racional& r, const racional& s);
+        friend bool operator <=(const racional& r, const racional& s);
+        friend bool operator >(const racional& r, const racional& s);
+        friend bool operator >=(const racional& r, const racional& s);
         friend racional inv(const racional& r);
 
         private:

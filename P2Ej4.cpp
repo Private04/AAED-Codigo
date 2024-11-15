@@ -11,27 +11,29 @@ int main()
 {
     cronometro c;
     const int N = 20000;
-    int v[N];
+    int v[N];//Vector aleatorizado
+    int w[N];//Vectorr a ordenar
     int cont;
     const double err_rel=0.5e-6;
     const double err_abs=1e-6;
-    for (int i=0;i<=19999;i++)
+    for (int i=0;i<=19999;i++)//Inicializacion del vector
     {
         v[i]=i+1;
     }
     for (int n=1000;n<=20000;n+=1000)
     {
-        cont = 0;
+        random_shuffle(v,v+n);
+        cont = 0;//Numero de veces que se ejecuta la funcion
         c.activar();
         do{
-            random_shuffle(v,v+n);
             
-            ordenacion_seleccion(v,v+n);
+            memcpy(w,v,sizeof(int)*n);
+            ordenacion_intercambio(w,w+n);
             
             cont++;
-        }while(c.tiempo()<err_abs/err_rel+err_abs);
+        }while(c.tiempo()<err_abs/err_rel+err_abs);//Repetir hasta que pase suficiente tiempo tal que el error absoluto<error relativo y esperar un instante para asegurar que se supera
         c.parar();
-        cout << "Tiempo de ejecucion para n=" << n << ": " << c.tiempo()/cont << endl;  
+        cout << "Tiempo de ejecucion para n=" << n << ": " << c.tiempo()/cont << endl << "Numero de veces ejecutado: " << cont << endl;  
     }
     cin.ignore(); 
     return 0;
