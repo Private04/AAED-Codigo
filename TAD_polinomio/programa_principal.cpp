@@ -7,7 +7,7 @@ int main()
 {
     char op;
     polinomio x=escritura(),y=escritura();//Parametros de entrada
-    polinomio res;
+    
     bool op_valida;
     char salida;
     do {
@@ -17,25 +17,38 @@ int main()
         switch (op)
         {
             case '+':
-            res=x+y;
+            {
+                polinomio res(/*(x.grado()>y.grado())? x.grado() :*/ y.grado());
+                res=x+y;
+                lectura(res);
+            }
             break;
             case '*':
-            res=x*y;
+            {
+                polinomio res(x.grado()+y.grado());
+                res=x*y;
+                lectura(res);
+            }
             break;
             case '-':
-            res=x-y;
+            {
+                polinomio res((x.grado()>y.grado())? x.grado() : y.grado());
+                res=x-y;
+                lectura(res);
+            }
             break;
             case 'd':
-            res=deriv(x);
+            {
+                polinomio res(x.grado()-1);
+                res=deriv(x);
+                lectura(res);
+            }
             break;
             default:
             cout << endl << "Entrada no valida" << endl;
             op_valida=false;
         }
-        if (op_valida){
-            cout << endl << "El resultado es: " << endl;
-            lectura(res);
-        }
+        
         cout << "Desea realizar otra operacion? Escriba s para continuar y cualquier tecla si no.";
         cin >> salida;
     }while(salida=='s');
