@@ -10,13 +10,10 @@ class polinomio
         double coeficiente (unsigned n) const; //Devuelve el coeficiente del grado otorgado. Si n>gradMax, devuelve 0
         //Funciones modificadoras
         void coeficiente (unsigned n,double c); //Asigna un nuevo coeficiente de valor c al grado n. Precondicion: n<=gradMax
-        friend polinomio operator +(polinomio& x,polinomio& y); //Devuelve x+y
-        friend polinomio operator -(polinomio& x,polinomio& y); //Devuelve x-y
-        friend polinomio operator *(polinomio& x,polinomio& y); //Devuelve x*y
-        friend polinomio deriv(polinomio& x); //Devuelve la derivada de x
+        friend polinomio operator =(const &polinomio);
     private:
-        static const unsigned GRAD_MAX=100;
-        unsigned gradopoli;
-        double acoeficientes[GRAD_MAX];
+        unsigned GRADOMAX;//Grado máximo posible. Se define por el constructor y no se debe volver a modificar.
+        unsigned gradopoli;//Grado del último elemento con coeficiente no nulo
+        double *acoeficientes;
 };
 #endif

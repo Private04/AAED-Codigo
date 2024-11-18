@@ -18,7 +18,7 @@ int main()
         {
             case '+':
             {
-                polinomio res(/*(x.grado()>y.grado())? x.grado() :*/ y.grado());
+                polinomio res((x.grado()>y.grado())? x.grado() : y.grado());
                 res=x+y;
                 lectura(res);
             }

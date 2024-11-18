@@ -20,10 +20,11 @@ polinomio escritura()//Construccion y escritura de polinomio en pantalla
     }
     return nuevopol;
 } 
-void lectura(const polinomio& x) //Lectura de polinomio x en pantalla
+void lectura(const polinomio& x) //Lectura de polinomio x en pantalla.
 {
     for (unsigned grado_act=0;grado_act<=x.grado();grado_act++)
     {
         cout << "Coeficiente del grado: " << grado_act << " = " << x.coeficiente(grado_act) << endl;
     }
 }
+//PROBLEMA: La lectura solo lee correctamente en multiplicación. En suma, resta y derivada solo imprime el coeficiente de grado 0, independientemente del grado otorgado.
