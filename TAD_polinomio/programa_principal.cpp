@@ -1,14 +1,21 @@
 #include <iostream>
-#include "polinom.h"
+#include "mi_polinom.h"
 #include "arit_polinom.h"
 #include "e_s_polinom.h"
 using namespace std;
 int main()
 {
     char op;
-    polinomio x=escritura(),y=escritura();//Parametros de entrada
-    
+    unsigned gradx,grady;
     bool op_valida;
+    cout << "Escribe el grado de x seguido del de y" << endl;
+    cin >> gradx;
+    cin >> grady;
+    polinomio x(gradx),y(grady);//Parametros de entrada
+    escritura(x,gradx);
+    escritura(y,grady);
+    
+    
     char salida;
     do {
         op_valida=true;

@@ -1,5 +1,5 @@
-#ifndef P3EJ1_H
-#define P3EJ1_H
+#ifndef ARIT_POLINOM
+#define ARIT_POLINOM
 polinomio operator +(polinomio& x,polinomio& y); //Devuelve x+y
 polinomio operator -(polinomio& x,polinomio& y); //Devuelve x-y
 polinomio operator *(polinomio& x,polinomio& y); //Devuelve x*y
