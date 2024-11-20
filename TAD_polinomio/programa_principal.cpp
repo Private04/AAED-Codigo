@@ -8,12 +8,7 @@ int main()
     char op;
     unsigned gradx,grady;
     bool op_valida;
-    cout << "Escribe el grado de x seguido del de y" << endl;
-    cin >> gradx;
-    cin >> grady;
-    polinomio x(gradx),y(grady);//Parametros de entrada
-    escritura(x,gradx);
-    escritura(y,grady);
+    polinomio x=escritura(),y=escritura();//Parametros de entrada
     
     
     char salida;

@@ -3,9 +3,10 @@
 #include <cstddef>
 polinomio operator +(polinomio& x,polinomio& y) //Devuelve x+y
 {
-    polinomio suma((x.grado()>y.grado())?x.grado() : y.grado());
+    unsigned gradomax=(x.grado()>y.grado())?x.grado() : y.grado();
+    polinomio suma(gradomax);
     unsigned GradoSumado;
-    for (GradoSumado=0;GradoSumado<=suma.grado();GradoSumado++) 
+    for (GradoSumado=0;GradoSumado<=gradomax;GradoSumado++) 
     {
         suma.coeficiente(GradoSumado,x.coeficiente(GradoSumado)+y.coeficiente(GradoSumado));
     }
@@ -14,9 +15,10 @@ polinomio operator +(polinomio& x,polinomio& y) //Devuelve x+y
 }
 polinomio operator -(polinomio& x,polinomio& y) //Devuelve x-y
 {
-    polinomio resta((x.grado()>y.grado())?x.grado() : y.grado());
+    unsigned gradomax=(x.grado()>y.grado())?x.grado() : y.grado();
+    polinomio resta(gradomax);
     unsigned GradoRestado;
-    for (GradoRestado=0;GradoRestado<=resta.grado();GradoRestado++) 
+    for (GradoRestado=0;GradoRestado<=gradomax;GradoRestado++) 
     {
         resta.coeficiente(GradoRestado,x.coeficiente(GradoRestado)-y.coeficiente(GradoRestado));
     }
@@ -37,11 +39,13 @@ polinomio operator *(polinomio& x,polinomio& y) //Devuelve x*y
 }
 polinomio deriv(polinomio& x) //Devuelve la derivada de x
 {
-    polinomio deriv(x.grado()-1);
-    unsigned grado;
-    for (grado=0;grado<=deriv.grado();grado++)
+    
+    unsigned gradoderivado;
+    unsigned gradomaximo=x.grado()-1;
+    polinomio deriv(gradomaximo);
+    for (gradoderivado=0;gradoderivado<=gradomaximo;gradoderivado++)
     {
-        deriv.coeficiente(grado,(grado+1)*x.coeficiente(grado+1));
+        deriv.coeficiente(gradoderivado,(gradoderivado+1)*x.coeficiente(gradoderivado+1));
     }
     return deriv;
 }
