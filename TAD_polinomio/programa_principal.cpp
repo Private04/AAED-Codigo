@@ -9,9 +9,8 @@ int main()
     unsigned gradx,grady;
     bool op_valida;
     polinomio x=escritura(),y=escritura();//Parametros de entrada
-    
-    
     char salida;
+    
     do {
         op_valida=true;
         cout << endl << "Escribe * para multiplicar, + para sumar, - para restar o 'd' para calcular la derivada" << endl;

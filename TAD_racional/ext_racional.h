@@ -7,6 +7,7 @@ void operator /=(racional& r, const racional& s);
 racional operator -(const racional& r, const racional& s);
 racional operator /(const racional& r, const racional& s);
 racional operator +(const racional& r, const racional::entero& s);
+racional operator +(const racional& r);//operador monario
 bool operator !=(const racional& r, const racional& s);
 bool operator <=(const racional& r, const racional& s);
 bool operator >(const racional& r, const racional& s);

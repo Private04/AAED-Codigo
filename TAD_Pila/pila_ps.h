@@ -19,7 +19,7 @@ class pila_ps //Definicion de pila pseudoestatica
         size_t tamamax() const; //Devuelve el numero maximo de elementos que puede contener la pila
 
         //Funciones modificadoras
-        void push(const T dato);    //Almacena el dato en la pila, convirtiendose en el tope.
+        void push(const T& dato);    //Almacena el dato en la pila, convirtiendose en el tope.
                                     //Precondicion: tama()<tamamax() y T debe ser asignable
         void pop(); //Remueve el dato de la pila, haciendo que el introducido previamente sea el tope, si lo hay.
                     //Precondicion: La pila no esta vacia (tama>0)
@@ -76,7 +76,7 @@ size_t pila_ps<T>::tamamax() const
     return t_max;
 }
 template <typename T>
-void pila_ps<T>::push(T dato)
+void pila_ps<T>::push(const T& dato)
 {
     elementos[n_elementos]=dato;
     n_elementos++;
@@ -100,7 +100,13 @@ pila_ps<T>& pila_ps<T>::operator =(const pila_ps& p)
         {
             elementos[i]=p.elementos[i];
         }
-        delete aux;3
+        delete aux;
+        
     }
+}
+template <typename T>
+pila_ps<T>::~pila_ps()
+{
+    delete elementos[];
 }
 #endif

@@ -5,6 +5,10 @@ racional operator +(const racional& r, const racional::entero& s)
     racional suma(s);
     return r+suma;
 }
+racional operator +(const racional& r)
+{
+    return r;
+}
 racional operator /(const racional& r, const racional& s)
 {
     
