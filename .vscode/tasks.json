@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "${fileDirname}\\ej1.cpp",
+                "${fileDirname}\\oper_pila.cpp",
                 "-o",
                 "${fileDirname}\\test.exe",
                 
