@@ -9,6 +9,7 @@
                 "-g",
                 "${file}",
                 "${fileDirname}\\oper_pila.cpp",
+                "${fileDirname}\\e_s_pila.cpp",
                 "-o",
                 "${fileDirname}\\test.exe",
                 

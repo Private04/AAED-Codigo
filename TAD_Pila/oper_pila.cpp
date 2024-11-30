@@ -3,7 +3,7 @@
 #include "pila_ce.h"
 #include "oper_pila.h"
 
-bool secuencia_inversa_xy (char * s)
+bool secuencia_inversa_xy (char * s)//Ejercicio 1
 {
     
     Pila<char> x;
@@ -25,22 +25,22 @@ bool secuencia_inversa_xy (char * s)
     }
     return EsCorrecta;
 }
-bool secuencia_abcd(char *s)
+bool secuencia_abcd(char *s)//Ejercicio 2
 {
     bool EsCorrecta=true;
     char *cad_comprobando;
     size_t c_act=0;
     size_t i_act;
     Pila <char> p;
-    while(s[c_act]&&EsCorrecta)
+    while(s[c_act]&&EsCorrecta)//Guardar la cadena a comprobar en una pila
     {
         if (s[c_act]!='#')
         {
             p.push(s[c_act]);
         }
-        else
+        else//Una vez sabemos el numero de caracteres, creamos una cadena para enviarselo a la funcion
         {
-            cad_comprobando=new char[p.tama()];
+            cad_comprobando=new char[p.tama()+1];
             i_act=0;
             while (!p.vacia())
             {
@@ -48,7 +48,43 @@ bool secuencia_abcd(char *s)
                 p.pop();
                 i_act++;
             }
-            
+            cad_comprobando[i_act]='\0';
+            EsCorrecta=secuencia_inversa_xy(cad_comprobando);
+            delete[] cad_comprobando;
+        }
+        c_act++;
+    }
+    return EsCorrecta;
+}
+void inversion_delimitada(const char& a,const char& b,Pila<char>& p_inicial)//Ejercicio 3
+{
+    
+    Pila<char> p_aux;//Pila que almacena los elementos entre a y b para invertirlos
+    Pila<char> p_res;//Pila que almacena el resultado de la inversion.
+    while (p_inicial.tope()!=a&&!p_inicial.vacia())//Primero recorrer la pila hasta encontrar el valor a.
+    {
+        p_res.push(p_inicial.tope());
+        p_inicial.pop();
+    }
+    if (!p_inicial.vacia())
+    {
+        p_aux.push(p_inicial.tope());
+        p_inicial.pop();
+        while (p_aux.tope()!=b&&!p_inicial.vacia())//Guardar la secuencia a invertir en aux
+        {
+            p_aux.push(p_inicial.tope());
+            p_inicial.pop();
         }
     }
-}
+    while (!p_aux.vacia())//Mover aux a res
+    {
+        p_res.push(p_aux.tope());
+        p_aux.pop();
+    }
+    while (!p_res.vacia())//Mover res a inicial, invirtiendo la secuencia de aux y dando el resultado
+    {
+        p_inicial.push(p_res.tope());
+        p_res.pop();
+    }
+
+} 
