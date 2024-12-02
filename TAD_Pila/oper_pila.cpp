@@ -1,8 +1,8 @@
 #include <string>
-
+#include <fstream>
 #include "pila_ce.h"
 #include "oper_pila.h"
-
+using namespace std;
 bool secuencia_inversa_xy (char * s)//Ejercicio 1
 {
     
@@ -88,3 +88,35 @@ void inversion_delimitada(const char& a,const char& b,Pila<char>& p_inicial)//Ej
     }
 
 } 
+// Apila en P los valores númericos de los dígitos
+// extraídos del flujo de entrada fe
+fstream& operator >>(fstream& fe, Pila<int>& P)
+{
+char cifra ;
+while (fe.get( cifra ) && cifra != '\n') // leer caracteres hasta fin de línea
+P.push(cifra -= '0'); // convierte un dígito en su valor numérico
+return fe;
+}
+// Inserta en el flujo de salida fs la pila P
+fstream& operator <<(fstream& fs, Pila<int> P)
+{
+while (!P.vacia()) {
+
+fs << P.tope();
+P.pop();
+}
+fs << endl;
+return fs;
+}
+void suma_lineas_fichero(std::fstream& f)
+{
+    Pila<int> P,Q,R;
+    f >> P >> Q;
+    while (!P.vacia()&&!Q.vacia())
+    {
+        R.push(P.tope()+Q.tope());
+        P.pop();
+        Q.pop();
+    }
+    f << R;
+}
