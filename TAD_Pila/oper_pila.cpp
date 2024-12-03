@@ -108,15 +108,29 @@ P.pop();
 fs << endl;
 return fs;
 }
+
+
 void suma_lineas_fichero(std::fstream& f)
 {
     Pila<int> P,Q,R;
+    unsigned acarreo=0;
+    unsigned suma;
     f >> P >> Q;
-    while (!P.vacia()&&!Q.vacia())
+    while (!P.vacia()||!Q.vacia())
     {
-        R.push(P.tope()+Q.tope());
-        P.pop();
-        Q.pop();
+        suma=(!P.vacia()? P.tope(): 0)+(!Q.vacia()? Q.tope() : 0)+acarreo;
+        if (suma>=10)
+        {
+            suma-=10;
+            acarreo=1;
+        }
+        else
+        {
+            acarreo=0;
+        }
+        R.push(suma);
+        if (!P.vacia()) P.pop();
+        if (!Q.vacia()) Q.pop();
     }
     f << R;
 }

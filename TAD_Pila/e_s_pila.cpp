@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "pila_ce.h"
 #include "e_s_pila.h"
 using namespace std;
