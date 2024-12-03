@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <cassert>
 #include "pila_ce.h"
 #include "oper_pila.h"
 using namespace std;
@@ -133,4 +134,23 @@ void suma_lineas_fichero(std::fstream& f)
         if (!Q.vacia()) Q.pop();
     }
     f << R;
+}
+
+linea_texto::linea_texto(): cursor('\0')//Ejercicio 5
+{}
+void linea_texto::avanzar_cursor()
+{
+    assert(!siguiente.vacia());
+    previo.push(cursor);
+    cursor=siguiente.tope();
+    siguiente.pop();
+}
+void linea_texto::borrar_anterior()
+{
+    assert(!previo.vacia());
+    previo.pop();
+}
+void linea_texto::borrar_seleccionado()
+{
+    
 }
