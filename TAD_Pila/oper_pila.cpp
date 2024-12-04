@@ -136,13 +136,12 @@ void suma_lineas_fichero(std::fstream& f)
     f << R;
 }
 
-linea_texto::linea_texto(): cursor('\0')//Ejercicio 5
+linea_texto::linea_texto()
 {}
 void linea_texto::avanzar_cursor()
 {
     assert(!siguiente.vacia());
-    previo.push(cursor);
-    cursor=siguiente.tope();
+    previo.push(siguiente.tope());
     siguiente.pop();
 }
 void linea_texto::borrar_anterior()
@@ -152,5 +151,45 @@ void linea_texto::borrar_anterior()
 }
 void linea_texto::borrar_seleccionado()
 {
-    
+    assert(!siguiente.vacia());
+    siguiente.pop();
+}
+void linea_texto::insertar_caracter(char c)
+{
+    previo.push(c);
+}
+void linea_texto::ir_a_final()
+{
+    while (!siguiente.vacia())
+    {
+        previo.push(siguiente.tope());
+        siguiente.pop();
+    }
+}
+void linea_texto::ir_a_principio()
+{
+    while (!previo.vacia())
+    {
+        siguiente.push(previo.tope());
+        previo.pop();
+    }
+}
+void linea_texto::retrasar_cursor()
+{
+    siguiente.push(previo.tope());
+    previo.pop();
+}
+void linea_texto::sobrescribir_caracter(char c)
+{
+    assert(!previo.vacia());
+    previo.pop();
+    previo.push(c);
+}
+char linea_texto::cursor() const
+{
+    return siguiente.tope();
+}
+size_t linea_texto::tama() const
+{
+    return previo.tama()+siguiente.tama();
 }

@@ -6,8 +6,25 @@
 #include "e_s_pila.h"
 int main()
 {
-    std::fstream f("prueba.txt");
-    suma_lineas_fichero(f);
-    f.close();
-    return 0;
+    linea_texto f;
+    std::string s("Hola k ase");
+    size_t i;
+    for (i=0;i<s.length();i++)
+    {
+        f.insertar_caracter(s[i]);
+    }
+    f.ir_a_principio();
+    f.borrar_seleccionado();
+    f.avanzar_cursor();
+    f.avanzar_cursor();
+    f.avanzar_cursor();
+    f.avanzar_cursor();
+    f.borrar_anterior();
+    f.ir_a_final();
+    f.borrar_anterior();
+    f.ir_a_principio();
+    for (i=0;i<f.tama();i++)
+    {
+        std::cout << f.cursor();
+    }
 }

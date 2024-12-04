@@ -13,11 +13,12 @@ class linea_texto{//Ejercicio 5
         void ir_a_principio();
         void borrar_seleccionado();
         void borrar_anterior();
-        void insertar_caracter(const char& c);
-        void sobrescribir_caracter(const char& c);
+        void insertar_caracter(char c);
+        void sobrescribir_caracter(char c);
+        char cursor() const;
+        size_t tama() const;
     private:
-        Pila<char> previo;  //Cadena previa al cursor
-        char cursor;        //Caracter que apunta el cursor
+        Pila<char> previo;  //Cadena previa al cursor.
         Pila<char> siguiente;//Cadena siguiente al cursor
 };
 #endif
