@@ -23,8 +23,14 @@ int main()
     f.ir_a_final();
     f.borrar_anterior();
     f.ir_a_principio();
+    f.ir_a_final();
+    f.retrasar_cursor();
+    f.retrasar_cursor();
+    f.borrar_anterior();
+    f.ir_a_principio();
     for (i=0;i<f.tama();i++)
     {
-        std::cout << f.cursor();
+        std::cout << std::endl << f.cursor();
+        f.avanzar_cursor();
     }
 }
