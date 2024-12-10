@@ -24,11 +24,11 @@ class linea_texto{//Ejercicio 5
 
 //Ejercicio 6
 enum eFigura{VACIO=0,AS,DOS,TRES,CUATRO,CINCO,SEIS,SIETE,SOTA,CABALLO,REY};
-enum ePalo{OROS,COPAS,ESPADAS,BASTOS};
+enum ePalo{OROS=0,COPAS,ESPADAS,BASTOS};
 struct tCarta{
     eFigura figura;
     ePalo palo;
-    tCarta(eFigura f,ePalo p):figura(f),palo(p) {}
+    tCarta(eFigura f=VACIO,ePalo p=OROS):figura(f),palo(p) {}
 };
 bool solitario(const tCarta *baraja,eFigura *resultado); //Precondición: mazo apunta a un vector de 40+ elementos de tipo tCarta. 
                                                          //Simula una partida de solitario y devuelve true si se gana y false si no. Devuelve en resultado un vector con la última carta de cada montón.

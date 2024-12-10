@@ -1,36 +1,31 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <ctime>
 #include "pila_ce.h"
 #include "oper_pila.h"
 #include "e_s_pila.h"
 int main()
 {
-    linea_texto f;
-    std::string s("Hola k ase");
-    size_t i;
-    for (i=0;i<s.length();i++)
+    tCarta Mazo[40];
+    eFigura montones[4];
+    size_t indice=0;
+    for (ePalo i=OROS;i<=BASTOS;i=ePalo(i+1))
     {
-        f.insertar_caracter(s[i]);
+        for (eFigura j=AS;j<=REY;j=eFigura(j+1))
+        {
+            Mazo[indice]=tCarta(j,i);
+            indice++;
+        }
     }
-    f.ir_a_principio();
-    f.borrar_seleccionado();
-    f.avanzar_cursor();
-    f.avanzar_cursor();
-    f.avanzar_cursor();
-    f.avanzar_cursor();
-    f.borrar_anterior();
-    f.ir_a_final();
-    f.borrar_anterior();
-    f.ir_a_principio();
-    f.ir_a_final();
-    f.retrasar_cursor();
-    f.retrasar_cursor();
-    f.borrar_anterior();
-    f.ir_a_principio();
-    for (i=0;i<f.tama();i++)
+    srand(time(nullptr));
+    std::random_shuffle(Mazo,Mazo+40);
+    bool resultado=solitario(Mazo,montones);
+    std::cout << std::endl << resultado << std::endl;
+    for (ePalo i=OROS;i<=BASTOS;i=ePalo(i+1))
     {
-        std::cout << std::endl << f.cursor();
-        f.avanzar_cursor();
+        std::cout << std::endl << montones[i]; 
     }
+    return 0;
 }

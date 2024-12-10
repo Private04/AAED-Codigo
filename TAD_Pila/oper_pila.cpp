@@ -193,3 +193,43 @@ size_t linea_texto::tama() const
 {
     return previo.tama()+siguiente.tama();
 }
+
+bool solitario(const tCarta *baraja,eFigura *resultado)
+{
+    Pila<tCarta> tMazo,tMonton;
+    resultado[OROS]=VACIO;
+    resultado[COPAS]=VACIO;
+    resultado[ESPADAS]=VACIO;
+    resultado[BASTOS]=VACIO;
+    //0=ORO,1=COPAS,2=ESPADAS,3=BASTOS
+    int tama_prev;//Almacena el tamaño previo para comprobar cuando parar de jugar
+    for (size_t i=0;i<40;i++)//Preparación del mazo
+    {
+        tMazo.push(baraja[i]);
+    }
+    do
+    {
+        tama_prev=tMazo.tama();
+        while (!tMazo.vacia())
+        {
+            tMonton.push(tMazo.tope());
+            tMazo.pop();
+            if (!tMazo.vacia())//En caso de que solo quede una carta en el mazo
+            {
+                tMonton.push(tMazo.tope());
+                tMazo.pop();
+            }
+            while (!tMonton.vacia()&&tMonton.tope().figura==resultado[tMonton.tope().palo]+1)//Suma para comparaciones se puede hacer, pero no asignación?
+            {
+                resultado[tMonton.tope().palo]=tMonton.tope().figura;
+                tMonton.pop();
+            }
+        }
+        while (!tMonton.vacia())//Reponer el mazo
+        {
+            tMazo.push(tMonton.tope());
+            tMonton.pop();
+        }
+    }while(tMazo.tama()!=tama_prev&&!tMazo.vacia());
+    return tMazo.vacia();
+}
