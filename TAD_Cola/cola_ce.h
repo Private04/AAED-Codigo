@@ -3,7 +3,7 @@
 #include <cstddef> // size_t
 #include <utility> // swap
 #include <cassert>
-template <typename T> class Cola {
+template <typename T> class Cola_ce {
 public:
  Cola();
  bool vacia() const;
