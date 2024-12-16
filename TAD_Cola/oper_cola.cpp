@@ -28,3 +28,34 @@ bool pila_isomorfica(Pila<char> p,Cola_ce<char> c)
     }
     return resultado;
 }
+void invertir_cola_ab(Cola_ce<char> &c,char a,char b)
+{
+    Pila<char> aux;
+    size_t cont=0;
+    for (cont;cont<=c.tama()&&c.frente()!=a;cont++)//Buscar el elemento de a
+    {
+        c.push(c.frente());
+        c.pop();
+    }
+    if(!c.vacia())
+    {
+        aux.push(c.frente());
+        c.pop();
+        cont++;
+        for(cont;cont<=c.tama()&&aux.tope()!=b;cont++)
+        {
+            aux.push(c.frente());
+            c.pop();
+        }
+        while (!aux.vacia())
+        {
+            c.push(aux.tope());
+            aux.pop();
+        }
+        for (cont;cont<=c.tama();cont++)
+        {
+            c.push(c.frente());
+            c.pop();
+        }
+    }
+}
