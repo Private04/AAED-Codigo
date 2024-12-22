@@ -12,7 +12,7 @@ OPERACIONES
     bool esta_en_conjunto(const T& elem) const devuelve si el elemento esta en el conjunto
     const Lista<T>& elementos() const devuelve una lista de los elementos de la cola
     void insertar(const T& elem) PRECONDICION: El elemento no esta en el conjunto. inserta el elemento en el conjunto
-    void eliminar(const T& elem) PRECONDICION: El elemento esta en el conjunto. elimina el elemento del conjunto
+    void eliminar(const T& elem) Elimina el elemento del conjunto, si no esta, no elimina nada
     conjunto& operator &(const conjunto& b) Devuelve la interseccion de ambos conjuntos, es decir, un conjunto que contenga los elementos comunes en ambos conjuntos
     conjunto& operator |(const conjunto& b) Devuelve la union de ambos conjuntos, es decir, un conjunto que contiene elementos comunes y no comunes de ambos conjuntos
     conjunto& operator /(const conjunto& b) Devuelve la diferencia del primero sobre el segundo conjunto, es decir, un conjunto con los elementos de a que no estan contenidos en b

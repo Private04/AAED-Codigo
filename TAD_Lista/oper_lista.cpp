@@ -40,7 +40,32 @@ Lista<int>& concatena_orden(Lista<int> a,Lista<int> b)
         pos_b=b.siguiente(pos_b);
     }
 }
-void invertir_lista(Lista<int> l,Lista<int>::posicion p)
+void invertir_lista(Lista<int>& l,Lista<int>::posicion p)
 {
-    
+    Lista<int>::posicion pos_a_insertar=l.fin();//Posicion de donde vamos a empezar a insertar
+    Lista<int>::posicion aux;
+    while (l.siguiente(p)!=pos_a_insertar)
+    {
+        l.insertar(l.elemento(p),pos_a_insertar);
+        aux=p;
+        p=l.siguiente(p);
+        l.eliminar(aux);
+    }
+}
+Lista<char>& concatena_lista(const Lista<Lista<char>>& l)
+{
+    Lista<char> resultado;
+    Lista<Lista<char>>::posicion pos_ext=l.primera();
+    Lista<char>::posicion pos_int;
+    while(pos_ext!=l.fin())
+    {
+        pos_ext=l.elemento(pos_ext).primera();
+        while(pos_int!=l.elemento(pos_ext).fin())
+        {
+            resultado.insertar(l.elemento(pos_ext).elemento(pos_int),resultado.fin());
+            pos_int=l.elemento(pos_ext).siguiente(pos_int);
+        }
+        pos_ext=l.siguiente(pos_ext);
+    }
+    return resultado;
 }
