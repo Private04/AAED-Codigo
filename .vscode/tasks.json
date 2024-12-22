@@ -6,10 +6,11 @@
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
+                "-I ${fileDirname}",
                 "-g",
+                "${fileDirname}\\oper_lista.cpp",
                 "${file}",
-                "${fileDirname}\\oper_pila.cpp",
-                "${fileDirname}\\e_s_pila.cpp",
+                
                 "-o",
                 "${fileDirname}\\test.exe",
                 

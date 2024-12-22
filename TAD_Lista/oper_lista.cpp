@@ -1,4 +1,4 @@
-#include "lista_ps.h"
+#include "lista_c2e.h"
 #include "oper_lista.h"
 void eliminar_ocurr(Lista<char>& l,char c)
 {
@@ -15,7 +15,7 @@ void eliminar_ocurr(Lista<char>& l,char c)
 Lista<int>& concatena_orden(Lista<int> a,Lista<int> b)
 {
     Lista<int>::posicion pos_a=a.primera(),pos_b=b.primera();
-    Lista<int> resultado;
+    static Lista<int> resultado;
     while(pos_a!=a.fin()&&pos_b!=b.fin())
     {
         if (a.elemento(pos_a)<=b.elemento(pos_b))
@@ -39,6 +39,7 @@ Lista<int>& concatena_orden(Lista<int> a,Lista<int> b)
         resultado.insertar(b.elemento(pos_b),resultado.fin());
         pos_b=b.siguiente(pos_b);
     }
+    return resultado;
 }
 void invertir_lista(Lista<int>& l,Lista<int>::posicion p)
 {
@@ -54,12 +55,12 @@ void invertir_lista(Lista<int>& l,Lista<int>::posicion p)
 }
 Lista<char>& concatena_lista(const Lista<Lista<char>>& l)
 {
-    Lista<char> resultado;
+    static Lista<char> resultado;
     Lista<Lista<char>>::posicion pos_ext=l.primera();
     Lista<char>::posicion pos_int;
     while(pos_ext!=l.fin())
     {
-        pos_ext=l.elemento(pos_ext).primera();
+        pos_int=l.elemento(pos_ext).primera();
         while(pos_int!=l.elemento(pos_ext).fin())
         {
             resultado.insertar(l.elemento(pos_ext).elemento(pos_int),resultado.fin());

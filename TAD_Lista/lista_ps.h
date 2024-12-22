@@ -5,7 +5,8 @@
  #include <cassert>
 
 
- template <typename T> class Lista {
+ template <typename T> 
+ class Lista {
  public:
  typedef size_t posicion; // Posición de un elemento
  explicit Lista(size_t tamaMax = 0); // Requiere ctor. T()
@@ -28,6 +29,7 @@
  size_t Lmax, // Tamaño del vector
  n; // Longitud de la lista
 };
+
 template <typename T>
  inline Lista<T>::Lista(size_t tamaMax) :
  elementos(new T[tamaMax]),
@@ -55,7 +57,7 @@ template <typename T>
  {
  assert(p >= primera() && p <= fin());
  assert(tama() < tamaMax());
- // Desplazar los eltos. entre p y n() a la siguiente posición
+ // Desplazar los eltos. entre p y n() a la siguiente posición
  for (posicion q = fin(); q > p; --q)
  elementos[q] = elementos[q-1];
  elementos[p] = x;
@@ -66,7 +68,7 @@ template <typename T>
  {
  assert(p >= primera() && p < fin());
  --n;
- // Desplazar los eltos. entre p+1 y n() a la posición anterior
+ // Desplazar los eltos. entre p+1 y n() a la posición anterior
  for (posicion q = p; q < fin(); ++q)
  elementos[q] = elementos[q+1];
  }
@@ -108,4 +110,5 @@ template <typename T>
  {
  delete[] elementos;
  }
- #endif
+ 
+#endif
