@@ -48,9 +48,8 @@ void invertir_lista(Lista<int>& l,Lista<int>::posicion p)
     while (l.siguiente(p)!=pos_a_insertar)
     {
         l.insertar(l.elemento(p),pos_a_insertar);
-        aux=p;
-        p=l.siguiente(p);
-        l.eliminar(aux);
+        
+        l.eliminar(p);
     }
 }
 Lista<char>& concatena_lista(const Lista<Lista<char>>& l)
