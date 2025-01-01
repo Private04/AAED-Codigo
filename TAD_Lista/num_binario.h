@@ -23,16 +23,16 @@
 class binario
 {
     public:
-        binario(const std::string& origen);
-        std::string& verNumero() const;
+        binario(const std::string& origen="");
+        std::string verNumero() const;
         size_t tama() const;
-        friend binario& operator ~(const binario& a);
-        friend binario& operator &(const binario& a, const binario& b);
-        friend binario& operator |(const binario& a, const binario& b);
-        friend binario& operator ^(const binario& a, const binario& b);
-        friend binario& operator <<(const binario& a, size_t n);
-        friend binario& operator >>(const binario& a, size_t n);
+        friend binario operator ~(const binario& a);
+        friend binario operator &(const binario& a, const binario& b);
+        friend binario operator |(const binario& a, const binario& b);
+        friend binario operator ^(const binario& a, const binario& b);
+        friend binario operator <<(const binario& a, size_t n);
+        friend binario operator >>(const binario& a, size_t n);
     private:
-        Lista<char> bits;
+        Lista<bool> bits;//False representa 0 y true representa 1
 };
 #endif

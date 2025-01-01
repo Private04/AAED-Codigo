@@ -9,7 +9,7 @@ class lista_ordenada{
     public:
         lista_ordenada();
         size_t tama() const;
-        const Lista<T> elementos() const;
+        const Lista<T>& elementos() const;
         bool vacia() const;
         bool esta_en_lista(const T& elem) const; //Precondición: La lista no esta vacía
         const T& inicio() const; //Precondicion: la lista no esta vacia
@@ -101,16 +101,16 @@ void lista_ordenada<T>::eliminar(const T& elem)
 template <typename T>
 bool lista_ordenada<T>::esta_en_lista(const T& elem) const
 {
-    assert(!vacia);
+    assert(!vacia());
     typename Lista<T>::posicion p=lista.primera();
-    while (p!=lista.anterior(lista.fin())&&elem<lista.elemento(p))
+    while (lista.siguiente(p)!=lista.fin()&&elem>lista.elemento(p))
     {
         p=lista.siguiente(p);
     }
-    return (elem==lista.elemento(p)));
+    return (elem==lista.elemento(p));
 }
 template <typename T>
-const Lista<T> lista_ordenada<T>::elementos() const
+const Lista<T>& lista_ordenada<T>::elementos() const
 {
     return lista;
 }

@@ -15,12 +15,17 @@ OPERACIONES
     bool vacio() const devuelve si es un Conjunto vacio
     bool esta_en_conjunto(const T& elem) const PRECONDICION: El conjunto no esta vacio. Devuelve si el elemento esta en el Conjunto
     const Lista<T>& elementos() const devuelve una lista de los elementos de la cola
-    void insertar(const T& elem) PRECONDICION: El elemento no esta en el Conjunto. Inserta el elemento en el Conjunto
-    void eliminar(const T& elem) PRECONDICION: El elemento esta en el Conjunto. Elimina el elemento del Conjunto.
+    void insertar(const T& elem) Inserta el elemento en el Conjunto, si ya esta, no hace nada
+    void eliminar(const T& elem) PRECONDICION:El elemento esta en el conjunto
     Conjunto& operator &(const Conjunto& b) Devuelve la interseccion de ambos conjuntos, es decir, un Conjunto que contenga los elementos comunes en ambos conjuntos
     Conjunto& operator |(const Conjunto& b) Devuelve la union de ambos conjuntos, es decir, un Conjunto que contiene elementos comunes y no comunes de ambos conjuntos
     Conjunto& operator -(const Conjunto& b) Devuelve la diferencia del primero sobre el segundo Conjunto, es decir, un Conjunto con los elementos de a que no estan contenidos en b
 */
+template <typename T> class Conjunto;
+template <typename T> Conjunto<T> operator &(const Conjunto<T>& a,const Conjunto<T>& b);
+template <typename T> Conjunto<T> operator |(const Conjunto<T>& a,const Conjunto<T>& b);
+template <typename T> Conjunto<T> operator -(const Conjunto<T>& a,const Conjunto<T>& b);
+
 template <typename T>
 class Conjunto{
     public:
@@ -31,9 +36,9 @@ class Conjunto{
         const Lista<T>& lista_elementos() const;
         void insertar(const T& elem);
         void eliminar(const T& elem);
-        friend Conjunto<T>& operator &(const Conjunto<T>& a,const Conjunto<T>& b);
-        friend Conjunto<T>& operator |(const Conjunto<T>& a,const Conjunto<T>& b);
-        friend Conjunto<T>& operator -(const Conjunto<T>& a,const Conjunto<T>& b);
+        friend Conjunto<T> operator & <>(const Conjunto<T>& a,const Conjunto<T>& b);
+        friend Conjunto<T> operator | <>(const Conjunto<T>& a,const Conjunto<T>& b);
+        friend Conjunto<T> operator - <>(const Conjunto<T>& a,const Conjunto<T>& b);
     private:
         lista_ordenada<T> elementos;
 };
@@ -49,7 +54,7 @@ size_t Conjunto<T>::cardinal() const
 template <typename T>
 bool Conjunto<T>::vacio() const
 {
-    return elementos.vacia()
+    return elementos.vacia();
 }
 template <typename T>
 bool Conjunto<T>::esta_en_conjunto(const T& elem) const
@@ -64,21 +69,27 @@ const Lista<T>& Conjunto<T>::lista_elementos() const
 template <typename T>
 void Conjunto<T>::insertar(const T& elem)
 {
-    elementos.insertar(elem);//No hago assert porque esta_en_conjunto es de orden (n)
+    if(!vacio())
+    {
+        if(!esta_en_conjunto(elem))
+            elementos.insertar(elem);
+    }
+    else
+        elementos.insertar(elem);
 }
 template <typename T>
 void Conjunto<T>::eliminar(const T& elem)
 {
-    elementos.eliminar(elem);//No hago assert porque esta_en_conjunto es de orden (n)
+    elementos.eliminar(elem);
 }
 template <typename T>
-Conjunto<T>& operator &(const Conjunto<T>& a,const Conjunto<T>& b)
+Conjunto<T> operator &(const Conjunto<T>& a,const Conjunto<T>& b)
 {
     Conjunto<T> res(b);
     if (!b.vacio())
     {
         T aux(b.elementos.inicio());
-        while (aux!=b.final())
+        while (aux!=b.elementos.ultimo())
         {
             if (!a.esta_en_conjunto(aux))
             {
@@ -94,12 +105,12 @@ Conjunto<T>& operator &(const Conjunto<T>& a,const Conjunto<T>& b)
     return res;
 }
 template <typename T>
-Conjunto<T>& operator |(const Conjunto<T>& a,const Conjunto<T>& b)
+Conjunto<T> operator |(const Conjunto<T>& a,const Conjunto<T>& b)
 {
     Conjunto<T> res(b);
-    if (!a.vacio) {
+    if (!a.vacio()) {
         T aux(a.elementos.inicio());
-        while (aux!=a.final())
+        while (aux!=a.elementos.ultimo())
         {
             if (!b.esta_en_conjunto(aux))
             {
@@ -115,13 +126,13 @@ Conjunto<T>& operator |(const Conjunto<T>& a,const Conjunto<T>& b)
     return res;
 }
 template <typename T>
-Conjunto<T>& operator -(const Conjunto<T>& a,const Conjunto<T>& b)
+Conjunto<T> operator -(const Conjunto<T>& a,const Conjunto<T>& b)
 {
     Conjunto<T> res(a);
-    if (!a.vacio)
+    if (!a.vacio())
     {
         T aux(a.elementos.inicio());
-        while (aux!=a.final())
+        while (aux!=a.elementos.ultimo())
         {
             if (b.esta_en_conjunto(aux))
             {
