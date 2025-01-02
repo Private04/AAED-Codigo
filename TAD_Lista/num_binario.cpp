@@ -1,6 +1,5 @@
 #include <string>
 #include <cstddef>
-#include "lista_ps.h"
 #include "num_binario.h"
 binario::binario(const std::string& s) : bits(s.length())
 {
@@ -116,5 +115,25 @@ binario operator ^(const binario& a,const binario& b)
         p_b=b.bits.siguiente(p_b);
     }
     res.bits=bits_res;
+    return res;
+}
+binario operator <<(const binario& a,size_t n)
+{
+    binario res(a);
+    for (size_t i=1;i<=n;i++)
+    {
+        res.bits.eliminar(res.bits.primera());
+        res.bits.insertar(false,res.bits.fin());
+    }
+    return res;
+}
+binario operator >>(const binario& a,size_t n)
+{
+    binario res(a);
+    for (size_t i=1;i<=n;i++)
+    {
+        res.bits.eliminar(res.bits.anterior(res.bits.fin()));//Eliminar el elemento de la posicion anterior a fin
+        res.bits.insertar(false,res.bits.primera());
+    }
     return res;
 }

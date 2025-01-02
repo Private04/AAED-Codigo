@@ -1,5 +1,6 @@
-#ifndef BINARIO_H
-#define BINARIO_H
+#ifndef NUM_BINARIO_H
+#define NUM_BINARIO_H
+#include "lista_ps.h"
 /*
     Se define como número binario a una secuencia de n>=0 digitos que tienen valor uno o cero, denominados bits.
     El valor del numero binario equivale al sumatorio de bi*(2^i) donde b es el valor del bit e i es el numero de bits predecesores al que está siendo evaluado.
