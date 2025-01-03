@@ -24,6 +24,7 @@
 class binario
 {
     public:
+        
         binario(const std::string& origen="");
         std::string verNumero() const;
         size_t tama() const;

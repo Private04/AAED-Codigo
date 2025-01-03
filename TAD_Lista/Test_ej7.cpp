@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-
 #include "num_binario.h"
 int main(int argc,char **argv)
 {

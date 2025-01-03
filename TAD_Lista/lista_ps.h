@@ -5,8 +5,8 @@
  #include <cassert>
 
 
- template <typename T> 
- class Lista {
+template <typename T> 
+class Lista {
  public:
  typedef size_t posicion; // Posición de un elemento
  explicit Lista(size_t tamaMax = 0); // Requiere ctor. T()
