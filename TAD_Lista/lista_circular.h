@@ -2,6 +2,7 @@
 #define LISTA_CIRCULAR_H
 #include <cstddef>
 #include <cassert>
+#include <utility>
 template <typename T>
 class listaCir{
     struct nodo;
@@ -21,7 +22,7 @@ class listaCir{
         void insertar(const T& x, posicion p);
         void eliminar(posicion p);
         
-        Lista& operator =(const listaCir<T> original);
+        ListaCir& operator =(const listaCir& original);
         ~listaCir();
     private:
         struct nodo{
@@ -115,8 +116,40 @@ void listaCir<T>::eliminar(listaCir<T>::posicion p)
 }
 
 template <typename T>
-listaCir<T>::listaCir(const listaCir<T>& original)
+listaCir<T>::listaCir(const listaCir<T>& original) : n_elementos(original.n_elementos)
 {
-    
+    posicion aux_original=original.L;//Posicion para navegar la lista original.
+    posicion aux_this=POS_NULA;//Posicion para navegar la lista siendo creada.
+    for (size_t i=1;i<=n_elementos;i++)
+    {
+        insertar(aux_original->elemento,aux_this);
+        aux_original=original.siguiente(aux_original);
+        aux_this=siguiente(aux_this);
+    }
+}
+
+template <typename T>
+inline listaCir<T>& listaCir<T>::operator =(const listaCir& original)
+{
+    listaCir<T> L1(original);
+    std::swap(L1.L,this.L);
+    std::swap(L1.n_elementos,this.n_elementos);
+    return *this;
+}
+
+template <typename T>
+inline listaCir<T>::~listaCir()
+{
+    if(!vacia())
+    {
+        posicion aux=L->sig;
+        while (aux!=L)
+        {
+            aux=aux->sig;//Obtengo la poicion del siguiente y borro el anterior
+            delete aux->ant;
+        }
+        delete L;
+    }
+    n_elementos=0;
 }
 #endif
