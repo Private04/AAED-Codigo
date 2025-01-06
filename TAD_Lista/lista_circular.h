@@ -21,13 +21,13 @@ class listaCir{
         posicion anterior(posicion p) const;
         void insertar(const T& x, posicion p);
         void eliminar(posicion p);
-        
-        ListaCir& operator =(const listaCir& original);
+        listaCir& operator =(const listaCir& original);
         ~listaCir();
     private:
         struct nodo{
             T elemento;
-            nodo *sig,ant;
+            nodo *sig;
+            nodo *ant;
             nodo(const T& elem,nodo *anterior=nullptr,nodo *siguiente=nullptr) : elemento(elem), sig(siguiente), ant(anterior) {}
         };
         size_t n_elementos;
@@ -65,21 +65,21 @@ inline T& listaCir<T>::elemento (listaCir<T>::posicion p)
 }
 
 template <typename T>
-inline listaCir<T>::posicion listaCir<T>::anterior(listaCir<T>::posicion p) const
+inline typename listaCir<T>::posicion listaCir<T>::anterior(listaCir<T>::posicion p) const
 {
     assert (p != POS_NULA && !vacia());
     return p->ant;
 }
 
 template <typename T>
-inline listaCir<T>::posicion listaCir<T>::siguiente(listaCir<T>::posicion p) const
+inline typename listaCir<T>::posicion listaCir<T>::siguiente(listaCir<T>::posicion p) const
 {
     assert (p != POS_NULA && !vacia());
     return p->sig;
 }
 
 template <typename T>
-inline listaCir<T>::posicion listaCir<T>::inipos() const
+inline typename listaCir<T>::posicion listaCir<T>::inipos() const
 {
     return (vacia())? POS_NULA : L;
 }
@@ -111,21 +111,25 @@ void listaCir<T>::eliminar(listaCir<T>::posicion p)
     assert(!vacia()&&p!=POS_NULA);
     (p->ant)->sig=p->sig;
     (p->sig)->ant=p->ant;
-    n--;
+    n_elementos--;
+    if (p==L)
+        L=p->sig;
     delete p;
 }
 
 template <typename T>
-listaCir<T>::listaCir(const listaCir<T>& original) : n_elementos(original.n_elementos)
+listaCir<T>::listaCir(const listaCir<T>& original)
 {
     posicion aux_original=original.L;//Posicion para navegar la lista original.
     posicion aux_this=POS_NULA;//Posicion para navegar la lista siendo creada.
-    for (size_t i=1;i<=n_elementos;i++)
+    n_elementos=0;
+    for (size_t i=1;i<=original.n_elementos;i++)
     {
         insertar(aux_original->elemento,aux_this);
         aux_original=original.siguiente(aux_original);
-        aux_this=siguiente(aux_this);
+        aux_this=siguiente(aux_this==POS_NULA? inipos() : aux_this);
     }
+    n_elementos=original.n_elementos;
 }
 
 template <typename T>

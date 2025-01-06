@@ -1,6 +1,6 @@
 #include <string>
 #include <cassert>
-#include "lista_ps.h"
+
 #include "juego_aleatorio.h"
 /*En una variante de un juego bastante conocido, n jugadores, identificados por su nombre,
 se sitúan en círculo y se les asigna aleatoriamente un número del 1 al 6 (obviamente varios
@@ -12,30 +12,40 @@ descrita el siguiente jugador a eliminar. Este proceso se repite hasta que quede
 jugador, el ganador del juego.
 Implemente una función que determine y devuelva el jugador ganador, dado el conjunto
 de n jugadores con sus números del 1 al 6 asignados y la posición del jugador de comienzo.*/
-std::string juego_aleatorio(const Lista<jugador>& jugadores,Lista<jugador>::posicion j_inicial)
+std::string juego_aleatorio(const listaCir<jugador>& jugadores,listaCir<jugador>::posicion j_inicial)
 {
-    assert(jugadores.vacia());
-    
-   
-    Lista<jugador> supervivientes(jugadores);
-    Lista<jugador>::posicion j_actual=supervivientes.primera();
+    assert(!jugadores.vacia());
+    listaCir<jugador> supervivientes(jugadores);
+    listaCir<jugador>::posicion j_actual=supervivientes.inipos();
     int pos_eliminatoria=(jugadores.elemento(j_inicial)).numero;//Numero para calcular la posicion del siguiente jugador a eliminar
     //Transferencia de la posicion j_inicial a j_actual al hacer una copia de lista
-    while (j_inicial!=jugadores.primera())//Por cada posicion que tengo que mover anterior a j_inicial para llegar al principio, avanzo j_actual
+    while (j_inicial!=jugadores.inipos())//Por cada posicion que tengo que mover anterior a j_inicial para llegar al principio, avanzo j_actual
     {
         j_inicial=jugadores.anterior(j_inicial);
-        j_actual=jugadores.siguiente(j_actual);
+        j_actual=supervivientes.siguiente(j_actual);
     }
     //Comienzo del juego
+    if (pos_eliminatoria %2==0)
+    j_actual=supervivientes.siguiente(j_actual);//La funcion cuenta posiciones desde la posicion siguiente, porque la posicion ya no es valida si eliminamos al jugador
     while (supervivientes.tama()>1)
     {
-        if (pos_eliminatoria %2==1)
-            pos_eliminatoria*=-1;
+        if (pos_eliminatoria %2==1)//Si es impar, que sea negativa las posiciones a recorrer
+            pos_eliminatoria *= -1;
         
-        while (pos_eliminatoria>0)
+        while (pos_eliminatoria>1)//Si es positiva, avanza posiciones a la derecha (contando 1 porque es siguiente)
         {
-            j_actual
+            j_actual=supervivientes.siguiente(j_actual);
+            pos_eliminatoria--;
         }
+        while (pos_eliminatoria<0)//Si es negativa, avanza posiciones a la izquierda
+        {
+            j_actual=supervivientes.anterior(j_actual);
+            pos_eliminatoria++;
+        }
+
+        pos_eliminatoria=(supervivientes.elemento(j_actual)).numero;
+        j_actual=supervivientes.siguiente(j_actual);//Se pasa a la siguiente posicion para no perderla
+        supervivientes.eliminar(supervivientes.anterior(j_actual));//Y se elimina la anterior
     }
-    return (supervivientes.elemento(supervivientes.primera()).nombre);//Devuelve el nombre del único jugador de la lista
+    return (supervivientes.elemento(j_actual).nombre);//Devuelve el nombre del único jugador de la lista
 }
