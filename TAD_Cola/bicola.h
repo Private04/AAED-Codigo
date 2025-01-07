@@ -30,7 +30,7 @@ class Bicola{
             T valor;
             nodo *siguiente;
             nodo *anterior;
-            nodo(nodo *a=nullptr,const T& v,nodo *b=nullptr) : siguiente(b),valor(v),anterior(a) {};
+            nodo(nodo *a=nullptr,const T& v=T(),nodo *b=nullptr) : siguiente(b),valor(v),anterior(a) {};
         };
         nodo *inicio;
         nodo *final;
@@ -44,8 +44,10 @@ n_elementos(0)
 {}
 
 template <typename T>
-Bicola<T>::Bicola(const Bicola& B) : this.Bicola()
+Bicola<T>::Bicola(const Bicola& B)
 {
+    inicio=final=nullptr;
+    n_elementos=0;
     if (B.final)
     {
         nodo *aux=B.final;
@@ -83,7 +85,7 @@ void Bicola<T>::pop_frente()
     assert(n_elementos);
     nodo *aux=inicio;
     inicio=inicio->siguiente;
-    if (inicio)
+    if (inicio)//Si no es el último
         inicio->anterior=nullptr;
     else
         final=nullptr;
@@ -96,7 +98,7 @@ void Bicola<T>::push_final(const T& elem)
     if(final)
         final=final->siguiente=new nodo(final,elem);
     else
-        final=inicio=new nodo(elem);
+        final=inicio=new nodo(nullptr,elem);
     n_elementos++;
 }
 template <typename T>
@@ -118,7 +120,7 @@ Bicola<T>& Bicola<T>::operator=(const Bicola<T>& B)
     Bicola aux(B);
     std::swap(inicio,aux.inicio);
     std::swap(final,aux.final);
-    std::swap(n_elementos,B.n_elementos);
+    std::swap(n_elementos,aux.n_elementos);
     return *this;
 }
 template <typename T>

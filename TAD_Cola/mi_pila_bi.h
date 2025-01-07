@@ -6,7 +6,7 @@ class pila_bi
 {
     public:
          //Funciones constructoras
-        pila_ce ();    //Constructor por defecto, crea una pila vacia.
+        pila_bi ();    //Constructor por defecto, crea una pila vacia.
         //Funciones observadoras
         bool vacia() const; //Devuelve true si la pila esta vacia y false si hay al menos un elemento
         T tope() const;   //Devuelve el tope de la pila. 
@@ -23,4 +23,37 @@ class pila_bi
         Bicola<T> bi;
 };
 
+template <typename T>
+pila_bi<T>::pila_bi() : bi()
+{}
+
+template <typename T>
+bool pila_bi<T>::vacia() const
+{
+    return bi.vacia();
+}
+
+template <typename T>
+T pila_bi<T>::tope() const
+{
+    return bi.frente();
+}
+
+template <typename T>
+size_t pila_bi<T>::tama() const
+{
+    return bi.tama();
+}
+
+template <typename T>
+void pila_bi<T>::push(const T& valor)
+{
+    bi.push_frente();
+}
+
+template <typename T>
+void pila_bi<T>::pop()
+{
+    bi.pop_frente();
+}
 #endif
