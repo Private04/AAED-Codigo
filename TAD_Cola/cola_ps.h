@@ -3,18 +3,18 @@
  #include <cstddef> // size_t
  #include <utility> // swap
  #include <cassert>
- template <typename T> class Cola {
+ template <typename T> class Cola_ps {
  public:
- explicit Cola(size_t tamaMax = 0); // Requiere ctor. T()
+ explicit Cola_ps(size_t tamaMax = 0); // Requiere ctor. T()
  bool vacia() const;
  size_t tama() const;
  size_t tamaMax() const; // Requerida por la implementación
  const T& frente() const;
  void pop();
  void push(const T& x); // Requiere T asignable
- Cola(const Cola& C); // Ctor. de copia, req. T() y T asig.
- Cola& operator =(const Cola& C); // Asig., req. T() y T asig.
- ~Cola(); // Destructor
+ Cola_ps(const Cola_ps& C); // Ctor. de copia, req. T() y T asig.
+ Cola_ps& operator =(const Cola_ps& C); // Asig., req. T() y T asig.
+ ~Cola_ps(); // Destructor
  private:
  T* elementos; // Vector de elementos
  size_t Lmax, // Tamaño del vector
@@ -24,49 +24,49 @@
 
 
  template <typename T>
-inline Cola<T>::Cola(size_t tamaMax) : elementos(new T[tamaMax]),
+inline Cola_ps<T>::Cola_ps(size_t tamaMax) : elementos(new T[tamaMax]),
  elementos(new T[tamaMax]),
  Lmax(tamaMax),
  inicio(0),
  n_eltos(0)
  {}
  template <typename T>
- inline bool Cola<T>::vacia() const
+ inline bool Cola_ps<T>::vacia() const
  {
  return n_eltos == 0;
  }
  template <typename T>
- inline size_t Cola<T>::tama() const
+ inline size_t Cola_ps<T>::tama() const
  {
  return n_eltos;
  }
   template <typename T>
- inline size_t Cola<T>::tamaMax() const
+ inline size_t Cola_ps<T>::tamaMax() const
  {
  return Lmax;
  }
  template <typename T>
- inline const T& Cola<T>::frente() const
+ inline const T& Cola_ps<T>::frente() const
  {
  assert(!vacia());
  return elementos[inicio];
  }
  template <typename T>
- inline void Cola<T>::pop()
+ inline void Cola_ps<T>::pop()
  {
  assert(!vacia());
  inicio = (inicio + 1) % Lmax;
  --n_eltos;}
   template <typename T>
- inline void Cola<T>::push(const T& x)
+ inline void Cola_ps<T>::push(const T& x)
  {
- assert(n_eltos < Lmax); // Cola no llena
+ assert(n_eltos < Lmax); // Cola_ps no llena
  elementos[(inicio + n_eltos) % Lmax] = x;
  ++n_eltos;
  }
  // Constructor de copia
  template <typename T>
- Cola<T>::Cola(const Cola& C) : Cola(C.Lmax)
+ Cola_ps<T>::Cola_ps(const Cola_ps& C) : Cola_ps(C.Lmax)
  {
  if (!C.vacia()) {
  n_eltos = C.n_eltos;
@@ -76,9 +76,9 @@ inline Cola<T>::Cola(size_t tamaMax) : elementos(new T[tamaMax]),
  }
  // Asignación entre colas
  template <typename T>
- inline Cola<T>& Cola<T>::operator =(const Cola& C)
+ inline Cola_ps<T>& Cola_ps<T>::operator =(const Cola_ps& C)
  {
- Cola D(C);
+ Cola_ps D(C);
  std::swap(elementos, D.elementos);
  std::swap(Lmax, D.Lmax);
  std::swap(inicio, D.inicio);
@@ -87,7 +87,7 @@ inline Cola<T>::Cola(size_t tamaMax) : elementos(new T[tamaMax]),
  }
  // Destructor
  template <typename T>
- inline Cola<T>::~Cola()
+ inline Cola_ps<T>::~Cola_ps()
  {
  delete[] elementos;
  }
