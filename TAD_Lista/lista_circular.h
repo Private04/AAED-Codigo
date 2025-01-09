@@ -33,6 +33,7 @@ class listaCir{
         size_t n_elementos;
         nodo * L;
 };
+//TODO: CAMBIAR REPRESENTACION DE POSICION
 
 template <typename T>
 listaCir<T>::listaCir() : L(nullptr), n_elementos(0)
@@ -149,7 +150,7 @@ inline listaCir<T>::~listaCir()
         posicion aux=L->sig;
         while (aux!=L)
         {
-            aux=aux->sig;//Obtengo la poicion del siguiente y borro el anterior
+            aux=aux->sig;//Obtengo la posicion del siguiente y borro el anterior
             delete aux->ant;
         }
         delete L;
