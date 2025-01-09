@@ -25,14 +25,12 @@ std::string juego_aleatorio(const listaCir<jugador>& jugadores,listaCir<jugador>
         j_actual=supervivientes.siguiente(j_actual);
     }
     //Comienzo del juego
-    if (pos_eliminatoria %2==0)
-    j_actual=supervivientes.siguiente(j_actual);//La funcion cuenta posiciones desde la posicion siguiente, porque la posicion ya no es valida si eliminamos al jugador
     while (supervivientes.tama()>1)
     {
         if (pos_eliminatoria %2==1)//Si es impar, que sea negativa las posiciones a recorrer
             pos_eliminatoria *= -1;
         
-        while (pos_eliminatoria>1)//Si es positiva, avanza posiciones a la derecha (contando 1 porque es siguiente)
+        while (pos_eliminatoria>0)//Si es positiva, avanza posiciones a la derecha (contando 1 porque es siguiente)
         {
             j_actual=supervivientes.siguiente(j_actual);
             pos_eliminatoria--;
@@ -44,8 +42,7 @@ std::string juego_aleatorio(const listaCir<jugador>& jugadores,listaCir<jugador>
         }
 
         pos_eliminatoria=(supervivientes.elemento(j_actual)).numero;
-        j_actual=supervivientes.siguiente(j_actual);//Se pasa a la siguiente posicion para no perderla
-        supervivientes.eliminar(supervivientes.anterior(j_actual));//Y se elimina la anterior
+        supervivientes.eliminar(j_actual);
     }
-    return (supervivientes.elemento(j_actual).nombre);//Devuelve el nombre del único jugador de la lista
+    return supervivientes.elemento(j_actual).nombre;
 }

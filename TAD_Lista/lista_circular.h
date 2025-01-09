@@ -8,7 +8,7 @@ class listaCir{
     struct nodo;
     public:
         typedef nodo* posicion;
-        const posicion POS_NULA=nullptr;
+        static constexpr posicion POS_NULA=nullptr;
 
         listaCir();
         listaCir(const listaCir<T>& original);
@@ -55,14 +55,14 @@ template <typename T>
 inline const T& listaCir<T>::elemento(listaCir<T>::posicion p) const
 {
     assert(p != POS_NULA && !vacia());
-    return p->elemento;
+    return p->sig->elemento;
 }
 
 template <typename T>
 inline T& listaCir<T>::elemento (listaCir<T>::posicion p)
 {
     assert(p != POS_NULA && !vacia());
-    return p->elemento;
+    return p->sig->elemento;
 }
 
 template <typename T>
@@ -82,7 +82,7 @@ inline typename listaCir<T>::posicion listaCir<T>::siguiente(listaCir<T>::posici
 template <typename T>
 inline typename listaCir<T>::posicion listaCir<T>::inipos() const
 {
-    return (vacia())? POS_NULA : L;
+    return L;
 }
 
 template <typename T>
@@ -110,12 +110,13 @@ void listaCir<T>::eliminar(listaCir<T>::posicion p)
 {
     
     assert(!vacia()&&p!=POS_NULA);
-    (p->ant)->sig=p->sig;
-    (p->sig)->ant=p->ant;
+    nodo *aux=p->sig;
+    p->sig=aux->sig;
+    aux->sig->ant=p;
     n_elementos--;
-    if (p==L)
-        L=p->sig;
-    delete p;
+    if (n_elementos==0)
+        L=nullptr;//Reiniciar L si la lista esta vacia
+    delete aux;
 }
 
 template <typename T>

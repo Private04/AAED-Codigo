@@ -17,7 +17,7 @@ int main(int argc, char** argv)
         p=lista.siguiente(p);
     }
     p=lista.inipos();
-    for (int i=1;i<=2*lista.tama();i++)
+    for (int i=1;i<=lista.tama();i++)
     {
         std::cout << lista.elemento(p);
         p=lista.siguiente(p);
