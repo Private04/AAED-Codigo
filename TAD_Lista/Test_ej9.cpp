@@ -10,13 +10,13 @@ int main (int argc,char **argv)
 {
     listaCir<jugador> jugadores;
     listaCir<jugador>::posicion p;
-    jugadores.insertar(jugador(argv[1],1),listaCir<jugador>::POS_NULA);
+    jugadores.insertar(jugador(argv[1],rand_rango(1,6)),listaCir<jugador>::POS_NULA);
     p=jugadores.inipos();
     std::cout << "jugador "<< 1 << ": " << (jugadores.elemento(p)).nombre << " numero: " << (jugadores.elemento(p)).numero <<std::endl;
    
     for (int i=2;i<argc;i++)
     {
-        jugadores.insertar(jugador(argv[i],1),p);
+        jugadores.insertar(jugador(argv[i],rand_rango(1,6)),p);
         std::cout << "jugador "<< i << ": " << (jugadores.elemento(p)).nombre << " numero: " << (jugadores.elemento(p)).numero <<std::endl;
         p=jugadores.siguiente(p);
     }
