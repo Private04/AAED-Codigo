@@ -1,9 +1,12 @@
 #ifndef LISTA_ORDENADA_H
 #define LISTA_ORDENADA_H
-#include "lista_c2e.h"
 #include <cassert>
+#include "lista_c2e.h"
+
 //Se define como lista ordenada a una secuencia de elementos del mismo tipo en orden ascendente.
 //Cada elemento tiene un elemento que le procede, menos el primer elemento y un elemento que le sigue, menos el último elemento
+//Se define posicion como el lugar que ocupa un elemento en la lista.
+//TODO: Cambiar anterior y siguiente para que devuelvan una posicion. Lo mismo con inicio y ultimo. Esto afectaria tambien a TAD Conjunto
 template <typename T>
 class lista_ordenada{
     public:
@@ -11,9 +14,9 @@ class lista_ordenada{
         size_t tama() const;
         const Lista<T>& elementos() const;
         bool vacia() const;
-        bool esta_en_lista(const T& elem) const; //Precondición: La lista no esta vacía
-        const T& inicio() const; //Precondicion: la lista no esta vacia
-        const T& ultimo() const; //Preconcicion: La lista no esta vacia
+        bool esta_en_lista(const T& elem) const; //Precondición: La lista no esta vacía. Devuelve true si (...a,elem,b...)
+        const T& inicio() const; //Precondicion: la lista no esta vacia. Devuelve el primer elemento de la lista.
+        const T& ultimo() const; //Preconcicion: La lista no esta vacia. Devuelve el ultimo valor de la lista.
         const T& anterior(const T& elem) const; //Precondcion: El elemento está en la lista y NO es el primero. Devuelve el elemento que precede a la primera ocurrencia del elemento elem.
         const T& siguiente(const T& elem) const; //Precondcion: El elemento está en la lista y NO es el último. Devuelve el elemento que sigue a la última ocurrencia de elem.
         void insertar(const T& elem); //Inserta elem en la lista en la posicion anterior al primer elemento de la lista mayor que elem. Si la lista está vacía, se sitúa en la primera y última posición.

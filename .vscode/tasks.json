@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-I ${fileDirname}",
                 "-g",
-                "${fileDirname}\\oper_lista.cpp",
+                "${fileDirname}\\juego_aleatorio.cpp",
                 "${file}",
                 
                 "-o",

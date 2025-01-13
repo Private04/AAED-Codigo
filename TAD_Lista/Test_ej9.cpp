@@ -7,7 +7,7 @@ int rand_rango(int a,int b)
     return (rand() % (b-a+1)) + a;
 }
 int main (int argc,char **argv)
-{
+{   
     listaCir<jugador> jugadores;
     listaCir<jugador>::posicion p;
     jugadores.insertar(jugador(argv[1],rand_rango(1,6)),listaCir<jugador>::POS_NULA);
@@ -21,7 +21,7 @@ int main (int argc,char **argv)
         p=jugadores.siguiente(p);
     }
     std::cout << "Comienza el jugador " << jugadores.elemento(p).nombre << std::endl;
-    std::cout << "El ganador es: " << juego_aleatorio(jugadores,p) << std::endl;
+    std::cout << "El ganador es: " << juego_aleatorio(jugadores,jugadores.elemento(p).nombre) << std::endl;
 
     return 0;
 }

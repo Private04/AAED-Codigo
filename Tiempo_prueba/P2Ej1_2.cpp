@@ -67,6 +67,7 @@ int main()
             memcpy(w,x,sizeof(v));
             ordenacion_seleccion_directo(w,w+n);
             if (memcmp(v,w,n)) {cout << "ERROR en la comprobacion de: " << n << endl;}
+            return 1;
         }while(next_permutation(x,x+n));
 
     }
