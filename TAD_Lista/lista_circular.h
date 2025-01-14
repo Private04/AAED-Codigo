@@ -33,7 +33,6 @@ class listaCir{
         size_t n_elementos;
         nodo * L;
 };
-//TODO: CAMBIAR REPRESENTACION DE POSICION
 
 template <typename T>
 listaCir<T>::listaCir() : L(nullptr), n_elementos(0)
@@ -114,8 +113,11 @@ void listaCir<T>::eliminar(listaCir<T>::posicion p)
     p->sig=aux->sig;
     aux->sig->ant=p;
     n_elementos--;
+    if (aux==L)
+        L=L->sig;
     if (n_elementos==0)
         L=nullptr;//Reiniciar L si la lista esta vacia
+    
     delete aux;
 }
 
