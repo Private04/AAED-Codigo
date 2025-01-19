@@ -5,7 +5,7 @@
 
     OPERACIONES:
     Hospital(size_t n_uci,size_t n_planta) Crea un hospital vacío cuyo tamaño maximo de UCI es n_uci y Planta, n_planta
-    void ingreso(const Paciente& p) Precondición: p.gravedad!=0
+    void ingreso(const Paciente& p) Precondición: p.gravedad!=0 y p.id es distinto de cualquier id en planta o uci
                                 Inserta p en la agrupación del Hospital siguiendo el siguiente criterio:
                                     -Si p.gravedad<6: p se inserta en Planta.
                                         -Si Planta está llena, se elimina el paciente con menor gravedad en Planta para hacer espacio a p.
@@ -40,9 +40,12 @@ class Hospital{
     private:
         Lista<Paciente> uci;//Lista de pacientes en UCI
         Lista<Paciente> planta;//Lista de pacientes en Planta
+        //Tanto planta como uci van a estar ordenados por menor a mayor gravedad
         size_t MaxPlanta,MaxUci;//Tamaño máximo de pacientes en planta y pacientes en la uci
         size_t n_gravedad[9];//Contador de pacientes para cada gravedad en el hospital
-        Lista<Paciente>::posicion buscar_uci(const Paciente& p);
-        Lista<Paciente>::posicion buscar_planta(const Paciente& p);
+        Lista<Paciente>::posicion buscar_uci(const Paciente& p) const;
+        Lista<Paciente>::posicion buscar_planta(const Paciente& p) const;
+        void insertar_planta(const Paciente& p);
+        void insertar_uci(const Paciente& p);
 };
 #endif
